@@ -200,7 +200,7 @@ class RelCrudTest:
                 
                 result += "Notional trades >= 200:\n" + "".join(
                     [
-                        f"    trade_id={trade.trade_id} trade_type={trade.trade_type}\n"
+                        f"    trade_id={trade.trade_id} trade_type={trade.trade_type} notional={trade.notional}\n"
                         for trade in notional_trades
                     ]
                 )
