@@ -42,6 +42,7 @@ def create_trades(trade_count: int) -> List[TreeTrade]:
         TreeSwap(
             trade_id=f"T{(i + 1):03}",
             trade_type="Swap",
+            notional=(i+1)*100,
             legs=[
                 TreeLeg(leg_type="Fixed", leg_ccy=ccy_list[i % ccy_count]),
                 TreeLeg(leg_type="Floating", leg_ccy=ccy_list[(2 * i) % ccy_count]),
