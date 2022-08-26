@@ -104,6 +104,18 @@ class TreeCrudTest:
             ]
         )
 
+        
+        # Retrieve all trades with notional >=200
+        all_trades = TreeTrade.objects(notional>=200).order_by("trade_id")
+
+        # Add the result to approvaltests file
+        result += "All Trades with notional >=200:\n" + "".join(
+            [
+                f"    trade_id={trade.trade_id} trade_type={trade.trade_type} notional={trade.notional}\n"
+                for trade in all_trades
+            ]
+        )
+
         # Retrieve all swaps but skip bonds
         all_swaps = TreeSwap.objects.order_by("trade_id")
 
