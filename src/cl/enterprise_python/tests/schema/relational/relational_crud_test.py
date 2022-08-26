@@ -189,6 +189,22 @@ class RelCrudTest:
                         for trade in gbp_fixed_swaps
                     ]
                 )
+                
+                
+                # Retrieve all trades with notional >= 200
+                notional_trades = list(
+                    session.query(RelationalSwap)
+                    .where(RelationalSwap.notional >= 200)
+                    .order_by(RelationalSwap.trade_id)
+                )  # noqa
+                
+                result += "Notional trades >= 200:\n" + "".join(
+                    [
+                        f"    trade_id={trade.trade_id} trade_type={trade.trade_type}\n"
+                        for trade in notional_trades
+                    ]
+                )
+                
 
         # Verify result
         at.verify(result)
