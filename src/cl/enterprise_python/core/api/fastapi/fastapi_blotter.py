@@ -111,6 +111,22 @@ def query_trades(leg_ccy: Optional[str] = None):
     result = {"trades": [trade.to_json() for trade in trades]}
     return result
 
+@app.post("/query_by_notional")
+def query_by_notional(min_notional: Optional[float] = None):
+    """
+    If min_notional is specified, return all trades with notional
+    >= min_notional, otherwise return all trades.
+    """
+
+    # If leg_ccy is specified, return all trades where the currency for
+    # at least one of the legs is leg_ccy, otherwise return all trades.
+    if min_notional is not None:
+        trades = TreeSwap.objects(notional=min_notional).order_by("trade_id")
+    else:
+        trades = TreeSwap.objects.order_by("trade_id")
+    result = {"trades": [trade.to_json() for trade in trades]}
+    return result
+
 
 @app.get("/example_raising_exception")
 def example_raising_exception():
